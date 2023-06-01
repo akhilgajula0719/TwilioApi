@@ -33,7 +33,7 @@ public class TwilioSMS {
         
     }
     //method calling from LWC
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static string sendSMS(String textmessage) {
         system.debug('hello testing:'+textmessage);
         TwilioSMS twilio = new TwilioSMS();
@@ -41,7 +41,7 @@ public class TwilioSMS {
         return textmessage;
     }
     //Insert error in to log object
-    public void createLog(String response, String request, String error, String logtype, String errorclass){
+    public void createLog(String logtype, String error, String errorclass, String request, String response){
         Log__c log = new Log__c(Log_Type__c = logtype, Error__c = error,Class_Name__c= errorclass, Request__c = request,Response__c=response);
         insert log;
     }
